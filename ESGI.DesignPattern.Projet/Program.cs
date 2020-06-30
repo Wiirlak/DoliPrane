@@ -6,7 +6,14 @@ namespace ESGI.DesignPattern.Projet
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Checkout checkout =  new Checkout();
+            Money money = new Money(150);
+
+            Receipt receipt = checkout.CreateReceipt(money);
+            foreach (var i in receipt.Format())
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 }

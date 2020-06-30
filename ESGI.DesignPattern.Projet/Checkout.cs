@@ -15,7 +15,7 @@ namespace ESGI.DesignPattern.Projet
             receipt.Tax = vat;
             receipt.Total = amount.Add(vat);
 
-            ReceiptRepository.Store(receipt);
+            //ReceiptRepository.Store(receipt);
 
             return receipt;
         }
