@@ -8,9 +8,6 @@ namespace ESGI.DesignPattern.Projet.Tests
         [Fact]
         public void Checkout()
         {
-            
         }
-
     }
 }
-

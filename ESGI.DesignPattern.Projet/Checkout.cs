@@ -16,7 +16,7 @@ namespace ESGI.DesignPattern.Projet
                 .WithTotal(amount.Add(vat))
                 .Build();
 
-            // ReceiptRepository.Store(receipt);
+            ReceiptRepository.Store(receipt);
 
             return receipt;
         }

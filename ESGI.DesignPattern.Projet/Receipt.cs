@@ -20,13 +20,15 @@ namespace ESGI.DesignPattern.Projet
 
         public IEnumerable<string> Format()
         {
-            return new List<string>() { //
-                    "Receipt", //
-                    "=======", //
-                    "Item 1 ... " + Amount.Format(), //
-                    "Tax    ... " + Tax.Format(), //
-                    "----------------", //
-                    "Total  ... " + Total.Format() //
+            return new List<string>()
+            {
+                //
+                "Receipt", //
+                "=======", //
+                "Item 1 ... " + Amount.Format(), //
+                "Tax    ... " + Tax.Format(), //
+                "----------------", //
+                "Total  ... " + Total.Format() //
             };
         }
     }
