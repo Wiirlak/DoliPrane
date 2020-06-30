@@ -8,14 +8,15 @@ namespace ESGI.DesignPattern.Projet
     {
         public Receipt CreateReceipt(Money amount)
         {
-            var receipt = new Receipt();
             var vat = amount.Percentage(20);
 
-            receipt.Amount = amount;
-            receipt.Tax = vat;
-            receipt.Total = amount.Add(vat);
+            var receipt = new ReceiptBuilder()
+                .WithAmount(amount)
+                .WithTax(vat)
+                .WithTotal(amount.Add(vat))
+                .Build();
 
-            //ReceiptRepository.Store(receipt);
+            // ReceiptRepository.Store(receipt);
 
             return receipt;
         }

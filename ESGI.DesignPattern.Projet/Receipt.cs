@@ -6,9 +6,17 @@ namespace ESGI.DesignPattern.Projet
 {
     public class Receipt
     {
-        public Money Amount { get; set; }
-        public Money Tax { get; set; }
-        public Money Total { get; set; }
+        public Money Amount { get; }
+        public Money Tax { get; }
+        public Money Total { get; }
+
+        public Receipt(Money amount, Money tax, Money total)
+        {
+            Amount = amount;
+            Tax = tax;
+            Total = total;
+        }
+
 
         public IEnumerable<string> Format()
         {
