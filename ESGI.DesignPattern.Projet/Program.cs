@@ -6,7 +6,8 @@ namespace ESGI.DesignPattern.Projet
     {
         static void Main(string[] args)
         {
-            Checkout checkout = new Checkout();
+            ReceiptRepository repository = new ReceiptRepository();
+            Checkout checkout = new Checkout(repository);
             Money money = new Money(150);
 
             Receipt receipt = checkout.CreateReceipt(money);

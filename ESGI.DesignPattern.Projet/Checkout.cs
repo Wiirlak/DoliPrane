@@ -6,6 +6,13 @@ namespace ESGI.DesignPattern.Projet
 {
     public class Checkout
     {
+        private readonly IRepository _repository;
+        
+        public Checkout(IRepository repository)
+        {
+            _repository = repository;
+        }
+
         public Receipt CreateReceipt(Money amount)
         {
             var vat = amount.Percentage(20);
@@ -16,7 +23,7 @@ namespace ESGI.DesignPattern.Projet
                 .WithTotal(amount.Add(vat))
                 .Build();
 
-            ReceiptRepository.Store(receipt);
+            _repository.Store(receipt);
 
             return receipt;
         }

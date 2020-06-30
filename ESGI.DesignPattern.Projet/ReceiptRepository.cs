@@ -5,9 +5,9 @@ using System.Runtime.Serialization;
 
 namespace ESGI.DesignPattern.Projet
 {
-    public class ReceiptRepository
+    public class ReceiptRepository: IRepository
     {
-        public static void Store(Receipt receipt)
+        public void Store(Receipt receipt)
         {
             var databaseConnection = DatabaseConnection.GetInstance();
             if (databaseConnection == null)
