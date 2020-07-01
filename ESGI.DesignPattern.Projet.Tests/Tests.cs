@@ -37,8 +37,8 @@ namespace ESGI.DesignPattern.Projet.Tests
         [Fact]
         public void ReceiptRepositoryBuilderShouldThrowExceptionWithOutEnv()
         {
-            var ex = Assert.Throws<TypeInitializationException>(() => new ReceiptRepositoryBuilder().Build());
-            Assert.Equal("Environment variables may not have been set",ex.InnerException.Message);
+            var ex = Assert.Throws<Exception>(() => new ReceiptRepositoryBuilder().Build());
+            Assert.Equal("Environment variables may not have been set",ex.Message);
         }
         
         [Fact]
@@ -47,8 +47,8 @@ namespace ESGI.DesignPattern.Projet.Tests
             Environment.SetEnvironmentVariable("DATABASE_NAME","projet");
             Environment.SetEnvironmentVariable("DATABASE_USER","root");
             Environment.SetEnvironmentVariable("DATABASE_PASSWORD","mot2passe");
-            var ex = Assert.Throws<TypeInitializationException>(() => new ReceiptRepositoryBuilder().Build());
-            Assert.Equal("Can't connect to database",ex.InnerException.Message);
+            var ex = Assert.Throws<Exception>(() => new ReceiptRepositoryBuilder().Build());
+            Assert.Equal("Can't connect to database",ex.Message);
         }
         
         [Fact]
