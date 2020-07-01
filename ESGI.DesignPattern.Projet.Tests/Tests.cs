@@ -15,26 +15,39 @@ namespace ESGI.DesignPattern.Projet.Tests
 
     public class Tests
     {
+       
         [Fact]
         public void Checkout()
         {
-            ReceiptRepository repository = new ReceiptRepository();
-            Checkout checkout = new Checkout(repository);
-            Money money = new Money(150);
+            var repository = new MockReceiptRepository();
+            
+            var checkout = new CheckoutBuilder()
+                .WithRepository(repository)
+                .Build();
+            
+            var money = new MoneyBuilder()
+                .WithValue(150)
+                .Build();
 
-            Receipt receipt = checkout.CreateReceipt(money);
-            Assert.NotNull(receipt);
+            var receipt = checkout.CreateReceipt(money);
+            Assert.True(repository._receipts.Count == 1);
         }
         
         [Fact]
-        public void MockedCheckout()
+        public void ReceiptRepositoryBuilder_Should_Throw_Exception_With_Out_Env()
         {
-            MockReceiptRepository repository = new MockReceiptRepository();
-            Checkout checkout = new Checkout(repository);
-            Money money = new Money(150);
-
-            Receipt receipt = checkout.CreateReceipt(money);
-            Assert.True(repository._receipts.Count == 1);
+            var ex = Assert.Throws<Exception>(() => new ReceiptRepositoryBuilder().Build());
+            Assert.Equal("Environment variables may not have been set",ex.Message);
+        }
+        
+        [Fact]
+        public void ReceiptRepositoryBuilder_Should_Throw_Exception_With_Env()
+        {
+            Environment.SetEnvironmentVariable("DATABASE_NAME","projet");
+            Environment.SetEnvironmentVariable("DATABASE_USER","root");
+            Environment.SetEnvironmentVariable("DATABASE_PASSWORD","mot2passe");
+            var ex = Assert.Throws<Exception>(() => new ReceiptRepositoryBuilder().Build());
+            Assert.Equal("Can't connect to database",ex.Message);
         }
     }
 }

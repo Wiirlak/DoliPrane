@@ -6,7 +6,7 @@ namespace ESGI.DesignPattern.Projet
 {
     public static class DatabaseConnection
     {
-        private static MySqlConnection databaseConnection = null;
+        private static readonly MySqlConnection databaseConnection;
         private static readonly string DatabaseName = Environment.GetEnvironmentVariable("DATABASE_NAME");
         private static readonly string User = Environment.GetEnvironmentVariable("DATABASE_USER");
         private static readonly string Pass = Environment.GetEnvironmentVariable("DATABASE_PASSWORD");
@@ -15,8 +15,7 @@ namespace ESGI.DesignPattern.Projet
         {
             if (DatabaseName == null || User == null || Pass == null)
             {
-                Console.WriteLine("Error 32: Environment variables may not have been set");
-                return;
+                throw new Exception("Environment variables may not have been set");
             }
 
             try
@@ -31,8 +30,7 @@ namespace ESGI.DesignPattern.Projet
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error 51: Can't connect to database");
-                databaseConnection = null;
+                throw new Exception("Can't connect to database");
             }
         }
 

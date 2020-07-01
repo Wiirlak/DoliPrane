@@ -6,11 +6,17 @@ namespace ESGI.DesignPattern.Projet
     {
         static void Main(string[] args)
         {
-            ReceiptRepository repository = new ReceiptRepository();
-            Checkout checkout = new Checkout(repository);
-            Money money = new Money(150);
+            var repository = new ReceiptRepositoryBuilder().Build();
+            
+            var checkout = new CheckoutBuilder()
+                .WithRepository(repository)
+                .Build();
+            
+            var money = new MoneyBuilder()
+                .WithValue(150)
+                .Build();
 
-            Receipt receipt = checkout.CreateReceipt(money);
+            var receipt = checkout.CreateReceipt(money);
             foreach (var i in receipt.Format())
             {
                 Console.WriteLine(i);
