@@ -4,6 +4,12 @@
     {
         private decimal _value;
         
+        public MoneyBuilder WithValue(int value)
+        {
+            _value = value;
+            return this;
+        }
+        
         public MoneyBuilder WithValue(decimal value)
         {
             _value = value;
